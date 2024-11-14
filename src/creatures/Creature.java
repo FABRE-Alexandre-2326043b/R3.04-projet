@@ -68,4 +68,15 @@ public abstract class Creature {
 	public void etreDemoralise() {
         indicateurMoral-=5;
 	}
+	
+	public void afficherCaractéristiques() {
+		System.out.println();
+		System.out.print("Nom complet : " + nomComplet);
+		System.out.print("Sexe : " + sexe);
+		System.out.print("Poids : " + poids);
+		System.out.print("Taille : " + taille);
+		System.out.print("Âge : " + age);
+		System.out.print("Indiacteur de moral : " + indicateurMoral);
+		System.out.print("Liste de maladies : " + listeMaladies);
+	}
 }
