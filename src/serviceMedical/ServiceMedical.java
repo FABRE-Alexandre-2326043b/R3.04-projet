@@ -1,6 +1,7 @@
 package serviceMedical;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
 import creatures.Creature;
 import maladies.Maladie;
@@ -26,6 +27,9 @@ public class ServiceMedical {
 	
 	public void ajouterCreature(Creature creature) {
 		listeCreatures.add(creature);
+		if (Arrays.asList("Orque","HommeBete","Lycanthrope","Vampire").contains(creature.getClass())) {
+			creature.setRepresentants(true);
+		}
 	}
 	
 	public void retirerCreature(Creature creature) {

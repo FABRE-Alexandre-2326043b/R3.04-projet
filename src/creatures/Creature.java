@@ -13,6 +13,7 @@ public abstract class Creature {
     public int indicateurMoral ;
     public int nbHurlements;
     public ArrayList<Maladie> listeMaladies ;
+	public boolean representants;
 
     public Creature(String nomComplet, String sexe, int poids, int taille, int age, ArrayList<Maladie> listeMaladies) {
 		super();
@@ -30,6 +31,10 @@ public abstract class Creature {
 		return listeMaladies;
 	}
     
+	public void setRepresentants(boolean representants) {
+		this.representants = representants;
+	}
+
 	public void attendre () {
     	if (indicateurMoral>0) {
     		indicateurMoral-=1;

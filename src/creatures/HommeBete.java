@@ -5,8 +5,6 @@ import java.util.ArrayList;
 import maladies.Maladie;
 
 public class HommeBete extends CreatureBestiale{
-	public boolean representants;
-
 	public HommeBete(String nomComplet, String sexe, int poids, int taille, int age, ArrayList<Maladie> listeMaladies) {
 		super(nomComplet, sexe, poids, taille, age, listeMaladies);
 	}
