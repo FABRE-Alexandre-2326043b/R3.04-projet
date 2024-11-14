@@ -8,7 +8,7 @@ public class Vampire extends CreatureBestiale{
 	public Vampire(String nomComplet, String sexe, int poids, int taille, int age,
 			ArrayList<Maladie> listeMaladies) {
 		super(nomComplet, sexe, poids, taille, age, listeMaladies);
-		// TODO Auto-generated constructor stub
+		indicateurMoral=50;
 	}
 
 	public void trépasser() {
