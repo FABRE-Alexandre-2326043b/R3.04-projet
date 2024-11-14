@@ -27,7 +27,7 @@ public class ServiceMedical {
 	
 	public void ajouterCreature(Creature creature) {
 		listeCreatures.add(creature);
-		if (Arrays.asList("Orque","HommeBete","Lycanthrope","Vampire").contains(creature.getClass())) {
+		if (Arrays.asList("Orque","HommeBete","Lycanthrope","Vampire").contains(creature.getClass().getSimpleName())) {
 			creature.setRepresentants(true);
 		}
 	}
@@ -40,8 +40,23 @@ public class ServiceMedical {
 		creature.etreSoigne(maladie);
 	}
 	
-	public void reviserBudget(String valeur) {
-		this.budget = valeur;
+	public void reviserBudget() {
+		int place = nbCreatures/nbCreaturesMax;
+		if(place == 0.0) {
+			budget="inexistant";
+		}else if(place < 0.16) {
+			budget="insuffisant";
+		}else if(place < 0.33) {
+			budget="faible";
+		}else if(place < 0.5) {
+			budget="médiocre";
+		}else if(place < 0.66) {
+			budget="bien";
+		}else if(place < 0.83) {
+			budget="très bien";
+		}else {
+			budget="excellent";
+		}
 	}
 	
 }
