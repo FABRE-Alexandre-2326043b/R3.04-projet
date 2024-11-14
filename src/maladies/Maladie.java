@@ -3,6 +3,10 @@ package maladies;
 
 /**
  * Classe abstraite représentant une maladie quelconque. Elle permet de décrire le fonctionnement basique d'une maladie.
+ * Une maladie possède un nom complet et un nom abrégé, représentant la même maladie.<br>
+ * Une maladie possède un niveau qui représente la gravité actuelle de la maladie. Plus le niveau est haut, plus la maladie est grave.
+ * Si ce niveau est nul, cela veut dire que la maladie ne touche aucune créature.
+ * Si une maladie dépasse une certain niveau, le niveau maximum, la maladie est létale et la créature trépasse.
  * */
 public abstract class Maladie {
 	//Attriubts
@@ -32,7 +36,9 @@ public abstract class Maladie {
 	//Constructeurs
 	
 	/**
-	 * Constructeur de la classe maladie non-effective.
+	 * Constructeur de la classe maladie non-effective.<br>
+	 * Elle permet d'attribuer les valeurs des paramètres à tout type de maladie,
+	 * avec un niveau actuel à 0, c'est-à-dire que la maladie n'a pas infecté une créature.
 	 * @param nomComplet String: nom complet de la maldie
 	 * @param nomAbrege String: nom abrégé de la maladie
 	 * @param niveauMaximum int: niveau maximum de la maladie
@@ -45,7 +51,8 @@ public abstract class Maladie {
 	}
 	
 	/**
-	 * Constructeur de la classe maladie effective.
+	 * Constructeur de la classe maladie effective.<br>
+	 * Elle permet d'attribuer les valeurs des paramètres à tout type de maladie.
 	 * @param nomComplet String: nom complet de la maldie
 	 * @param nomAbrege String: nom abrégé de la maladie
 	 * @param niveauActuel int: niveau actuel de la maladie
@@ -113,6 +120,8 @@ public abstract class Maladie {
     		return false;
     	}
     }
+    
+    //toString
     
     /**
      * <p>Redéfinition de la méthode <strong>toString</strong> de la classe <strong>Object</strong>.</p>

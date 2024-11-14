@@ -3,6 +3,7 @@ package maladies;
 /**
  * Classe dérivée de la classe abstraite <strong>Maladie</strong> qui décrit une certaine maladie,
  * la maladie Maladie débilitante chronique (MDC).
+ * @see Maladie
  * */
 public class MaladieDebilitanteChronique extends Maladie {
 	//Attributs

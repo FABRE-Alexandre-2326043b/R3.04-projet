@@ -3,6 +3,7 @@ package maladies;
 /**
  * Classe dérivée de la classe abstraite <strong>Maladie</strong> qui décrit une certaine maladie,
  * la maladie Zoopathie Paraphrénique lycanthropique (ZPL).
+ * @see Maladie
  * */
 public class ZoopathiePaeaphréniqueLycanthropique extends Maladie {
 	//Attributs
@@ -14,6 +15,8 @@ public class ZoopathiePaeaphréniqueLycanthropique extends Maladie {
 	private int niveauActuel;
 	
 	//Constructeurs
+	
+	
 	public ZoopathiePaeaphréniqueLycanthropique(int niveauMaximum) {
 		super("Zoopathie Paraphrénique lycanthropique","ZPL", niveauMaximum);
 	}

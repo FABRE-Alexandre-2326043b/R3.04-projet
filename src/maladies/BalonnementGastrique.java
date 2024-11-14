@@ -3,6 +3,7 @@ package maladies;
 /**
  * Classe dérivée de la classe abstraite <strong>Maladie</strong> qui décrit une certaine maladie,
  * la maladie BalonnementGastrique (BG).
+ * @see Maladie
  * */
 public class BalonnementGastrique extends Maladie {
 	//Attributs
@@ -14,6 +15,8 @@ public class BalonnementGastrique extends Maladie {
 	private int niveauActuel;
 	
 	//Constructeurs
+	
+	
 	public BalonnementGastrique(int niveauMaximum) {
 		super("Balonnement Gastrique","BG", niveauMaximum);
 	}
