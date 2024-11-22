@@ -9,7 +9,7 @@ package maladies;
  * Si une maladie dépasse une certain niveau, le niveau maximum, la maladie est létale et la créature trépasse.
  * */
 public abstract class Maladie {
-	//Attriubts
+	//Attributs
 	
 	/**
 	 * Nom complet de la maladie

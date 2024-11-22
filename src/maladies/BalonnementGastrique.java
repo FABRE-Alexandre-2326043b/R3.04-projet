@@ -16,10 +16,19 @@ public class BalonnementGastrique extends Maladie {
 	
 	//Constructeurs
 	
-	
+	/**
+	 * Constructeur de la classe pour la maladie BG sans affecter de créatures, c'est à dire que le niveau actuel de la maladie est nul.
+	 * @param niveauMaximum: int niveau maximum de la maladie avant qu'elle ne soit létale.
+	 * */
 	public BalonnementGastrique(int niveauMaximum) {
 		super("Balonnement Gastrique","BG", niveauMaximum);
 	}
+	
+	/**
+	 * Constructeur de la classe pour la maladie BG avec un niveau de gravité qui affecte une créature.
+	 * @param niveauActuel: int niveau actuel de la maladie qui touche une créature
+	 * @param niveauMaximum: int niveau maximum de la maladie avant qu'elle ne soit létale.
+	 * */
 	public BalonnementGastrique(int niveauActuel, int niveauMaximum) {
 		this(niveauMaximum);
 		this.niveauActuel = niveauActuel;

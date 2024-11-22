@@ -15,9 +15,20 @@ public class MaladieDebilitanteChronique extends Maladie {
 	private int niveauActuel;
 	
 	//Constructeurs
+	
+	/**
+	 * Constructeur de la classe pour la maladie MDC sans affecter de créatures, c'est à dire que le niveau actuel de la maladie est nul.
+	 * @param niveauMaximum: int niveau maximum de la maladie avant qu'elle ne soit létale.
+	 * */
 	public MaladieDebilitanteChronique(int niveauMaximum) {
 		super("Maladie débilitante chronique","MDC", niveauMaximum);
 	}
+	
+	/**
+	 * Constructeur de la classe pour la maladie MDC avec un niveau de gravité qui affecte une créature.
+	 * @param niveauActuel: int niveau actuel de la maladie qui touche une créature
+	 * @param niveauMaximum: int niveau maximum de la maladie avant qu'elle ne soit létale.
+	 * */
 	public MaladieDebilitanteChronique(int niveauActuel, int niveauMaximum) {
 		this(niveauMaximum);
 		this.niveauActuel = niveauActuel;
