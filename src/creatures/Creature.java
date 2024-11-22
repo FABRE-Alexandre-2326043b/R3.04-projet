@@ -5,12 +5,12 @@ import java.util.ArrayList;
 import maladies.Maladie;
 
 public abstract class Creature {
-    public String nomComplet ;
-    public String sexe ;
-    public int poids ;
-    public int taille ;
-    public int age ;
-    public int indicateurMoral ;
+    public String nomComplet;
+    public String sexe;
+    public int poids;
+    public int taille;
+    public int age;
+    public int indicateurMoral;
     public int nbHurlements;
     public ArrayList<Maladie> listeMaladies;
 	public boolean representants;

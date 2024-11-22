@@ -11,7 +11,7 @@ public class Orque extends CreatureBestiale{
 	
 	public void attendre() {
 		if (representants) {
-			indicateurMoral-=0.5 ;
+			indicateurMoral-=0.5;
 		}
 	}
 }

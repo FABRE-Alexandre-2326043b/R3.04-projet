@@ -11,7 +11,7 @@ public class Elfe extends Creature{
 	}
 
 	public void trepasser(Creature creature) {
-        System.out.println(nomComplet + "trépasse") ;
+        System.out.println(nomComplet + "trépasse");
 		creature.etreDemoralise();
 	}
 }
