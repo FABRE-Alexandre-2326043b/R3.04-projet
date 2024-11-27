@@ -1,143 +1,136 @@
-package creatures;
+package maladies;
 
-import java.util.ArrayList;
-import maladies.Maladie;
+
 /**
- * Classe abstraite représentant une créature quelconque. Elle permet de décrire le fonctionnement basique d'une créature.
- * Une créature possède un nom complet, un sexe, un poids, une taille, un âge et une liste de maladies
- * Une créature possède un indicateur de moral qui indique le moral de la créature. Plus l'indicateur est haut, plus la créature peut attendre longtemps. 
- * Si cet indicateur est nul, la créature hurle.
- * Si une créature hurle 5 fois de suite, elle s'emporte et a de bonnes chances de contaminer une autre créature.
+ * Classe abstraite représentant une maladie quelconque. Elle permet de décrire le fonctionnement basique d'une maladie.
+ * Une maladie possède un nom complet et un nom abrégé, représentant la même maladie.<br>
+ * Une maladie possède un niveau qui représente la gravité actuelle de la maladie. Plus le niveau est haut, plus la maladie est grave.
+ * Si ce niveau est nul, cela veut dire que la maladie ne touche aucune créature.
+ * Si une maladie dépasse une certain niveau, le niveau maximum, la maladie est létale et la créature trépasse.
  * */
-public abstract class Creature {
+public abstract class Maladie {
+	//Attributs
+	
 	/**
-	 * Nom complet de la créature
-	 */
-    public String nomComplet;
-    /**
-     * Sexe de la créature
-     */
-    public String sexe;
-    /**
-     * Poids de la créature en kg
-     */
-    public int poids;
-    /**
-     * Taille de la créature en cm
-     */
-    public int taille;
-    /**
-     * Âge de la créature en années
-     */
-    public int age;
-    /**
-     * Indicateur de moral de la créature
-     * @value 100:int par défaut
-     */
-    public int indicateurMoral;
-    /**
-     * Nombre de hurlements de la créature
-     *      
-     * @value 0:int par défaut
-     */
-    public int nbHurlements;
-    /**
-     * Liste des maladies de la créature
-     */
-    public ArrayList<Maladie> listeMaladies;
-    /**
-     * Représentants de la créature
-     */
-	public boolean representants;
-
-	/**
-	 * Constructeur de la classe créature non-effective.<br>
-	 * Elle permet d'attribuer les valeurs des paramètres à tout type de créature,
-	 * avec un indicateur de moral de la créature à 0, c'est-à-dire que la la créature peut attendre longtemps.
-	 * et un 
-	 * @param nomComplet String: nom complet de la créature
-	 * @param sexe String: sexe de la créature
-	 * @param poids int: poids de la créature
-	 * @param taille int: taille de la créature
-	 * @param age int: âge de la créature
-	 * @param listeMaladies ArrayList<Maladie>: liste des maladies de la créature
+	 * Nom complet de la maladie
 	 * */
-    public Creature(String nomComplet, String sexe, int poids, int taille, int age, ArrayList<Maladie> listeMaladies) {
-		super();
+	private String nomComplet;
+	
+	/**
+	 * Nom abrégé de la maladie
+	 * */
+	private String nomAbrege;
+	
+	
+	/**
+	 * Niveau actuel de la maladie
+	 * @value 0:int par défaut si non initialisation à la base
+	 * */
+	private int niveauActuel;
+	
+	/**
+	 * Niveau maximum de la maladie avant trépas
+	 * */
+	private int niveauMaximum;
+	
+	//Constructeurs
+	
+	/**
+	 * Constructeur de la classe maladie non-effective.<br>
+	 * Elle permet d'attribuer les valeurs des paramètres à tout type de maladie,
+	 * avec un niveau actuel à 0, c'est-à-dire que la maladie n'a pas infecté une créature.
+	 * @param nomComplet String: nom complet de la maldie
+	 * @param nomAbrege String: nom abrégé de la maladie
+	 * @param niveauMaximum int: niveau maximum de la maladie
+	 * */
+	public Maladie(String nomComplet, String nomAbrege, int niveauMaximum) {
 		this.nomComplet = nomComplet;
-		this.sexe = sexe;
-		this.poids = poids;
-		this.taille = taille;
-		this.age = age;
-		this.indicateurMoral = 100;
-		this.nbHurlements = 0;
-		this.listeMaladies = listeMaladies;
-	}
-    
-    public ArrayList<Maladie> getListeMaladies() {
-		return listeMaladies;
-	}
-    
-	public void setRepresentants(boolean representants) {
-		this.representants = representants;
-	}
-
-	public void attendre () {
-    	if (indicateurMoral>0) {
-    		indicateurMoral-=1;
-    	}else {
-    		hurler();
-    	}        
-    }
-	
-	public void hurler () {
-        System.out.println(nomComplet + " hurle");
-        nbHurlements+=1;
-        if (nbHurlements>5){
-        	sEmporter();
-        }
-    }
-	
-    public void sEmporter (){
-        System.out.println(nomComplet + " s'emporte");
-        
-    }
-    
-    public void tomberMalade (Maladie maladie){
-        System.out.println(nomComplet + " tombe malade de " + maladie.getNomComplet());
-        listeMaladies.add(maladie);
-    }
-    
-    public void etreSoigne (Maladie maladie) {
-        System.out.println(nomComplet + " est guéri de " + maladie.getNomComplet());
-        listeMaladies.remove(maladie);
-        indicateurMoral += 30;
-        nbHurlements = 0;
-    }
-    
-    public void trepasser(){
-        System.out.println(nomComplet + "trépasse");
-    }
-    
-	public void etreDemoralise() {
-        indicateurMoral-=5;
+		this.nomAbrege = nomAbrege;
+		this.niveauMaximum = niveauMaximum;
+		this.niveauActuel = 0;
 	}
 	
-	public void afficherCaractéristiques() {
-		System.out.println();
-		System.out.print("Nom complet : " + nomComplet);
-		System.out.print(", Sexe : " + sexe);
-		System.out.print(", Poids : " + poids);
-		System.out.print(" kg, Taille : " + taille);
-		System.out.print(" cm, Âge : " + age);
-		System.out.print(" ans, Indicateur de moral : " + indicateurMoral);
-		System.out.print("%, Liste de maladies : [");
-		for (Maladie maladie : listeMaladies) {
-			System.out.print(maladie.getNomAbrege());
-			if(!listeMaladies.getLast().equals(maladie)) {
-				System.out.print(",");
-			}
-		}
-		System.out.println("]");
+	/**
+	 * Constructeur de la classe maladie effective.<br>
+	 * Elle permet d'attribuer les valeurs des paramètres à tout type de maladie.
+	 * @param nomComplet String: nom complet de la maldie
+	 * @param nomAbrege String: nom abrégé de la maladie
+	 * @param niveauActuel int: niveau actuel de la maladie
+	 * @param niveauMaximum int: niveau maximum de la maladie
+	 * */
+	public Maladie(String nomComplet, String nomAbrege, int niveauActuel, int niveauMaximum) {
+		this(nomComplet, nomAbrege, niveauMaximum);
+		this.niveauActuel = niveauActuel;
 	}
+	
+	//Getters/Setters
+	/**
+	 * Renvoie le nom complet de la maladie
+	 * @return nomComplet String: Nom complet de la maladie sous forme de chaîne de caractères
+	 * */
+    public String getNomComplet() {
+        return this.nomComplet;
+    }
+    
+    /**
+     * Renvoie le nom abregé de la maladie
+     * @return nomAbrege String: Nom abrégé de la maladie sous forme de chaîne de caractères
+     * */
+    public String getNomAbrege() {
+    	return this.nomAbrege;
+    }
+    
+    //Méthodes
+    
+    /**
+     * Permet d'augmenter le niveau actuel de la maladie en entrant la valeur correspondante
+     * @param niveau int: Le nombre de niveau à augmenter
+     * */
+    public void augmenterNiveauActuel(int niveau) {
+    	if (this.niveauActuel + niveau < Integer.MAX_VALUE) {
+    		this.niveauActuel += niveau;
+    	}
+    	else {
+    		System.err.println("La valeur que vous avez entrée provoque un dépassement de la limite des entiers.");
+    	}
+    }
+    
+    /**
+     * Permet de réduire le niveau actuel de la maladie en entrant la valeur correspondante
+     * @param niveau int: Le nombre de niveau à réduire
+     * */
+    public void reduireNiveauActuel(int niveau) {
+    	if (this.niveauActuel-niveau >= 0) {
+    		this.niveauActuel -= niveau;
+    	}
+    	else {
+    		System.err.println("La valeur que vous avez entrée est invalide.");
+    	}
+    }
+    
+    /**
+     * Renvoie vrai si le niveau de la maladie est létal, faux sinon
+     * @return estLetal boolean: Si le niveau actuel est supérieure ou égale au niveau maximum, la maladie est létal. Sinon, elle n'est pas létale.
+     * */
+    public boolean estLetal() {
+    	if (this.niveauActuel >= this.niveauMaximum) {
+    		return true;
+    	}
+    	else {
+    		return false;
+    	}
+    }
+    
+    //toString
+    
+    /**
+     * <p>Redéfinition de la méthode <strong>toString</strong> de la classe <strong>Object</strong>.</p>
+     * Renvoie une chaîne de caractères représentant les informations sur une maladie de type Maladie.
+     * @return String: Chaîne de caractères représentant l'objet Maladie avec les valeurs de l'instance
+     * */
+    @Override
+    public String toString() {
+    	return "Maladie[nomComplet=" + this.nomComplet + ", nomAgrege=" + this.nomAbrege +
+    			", niveauActuel=" + this.niveauActuel + ", niveauMaximum=" + this.niveauMaximum + "]";
+    }
 }
