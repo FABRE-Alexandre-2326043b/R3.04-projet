@@ -1,6 +1,5 @@
 package maladies;
 
-
 /**
  * Classe abstraite représentant une maladie quelconque. Elle permet de décrire le fonctionnement basique d'une maladie.
  * Une maladie possède un nom complet et un nom abrégé, représentant la même maladie.<br>
@@ -48,7 +47,7 @@ public abstract class Maladie {
 	 * @param nomComplet String: nom complet de la maldie
 	 * @param nomAbrege String: nom abrégé de la maladie
 	 * @param niveauMaximum int: niveau maximum de la maladie
-	 * @throws ErreurChangementNiveauException Erreur si le
+	 * @throws ErreurChangementNiveauException Erreur si le niveau maximal de la maladie est entre 0 et 1000
 	 * */
 	public Maladie(String nomComplet, String nomAbrege, int niveauMaximum) throws ErreurChangementNiveauException {
 		this.nomComplet = nomComplet;
@@ -70,6 +69,7 @@ public abstract class Maladie {
 	 * @param nomAbrege String: nom abrégé de la maladie
 	 * @param niveauActuel int: niveau actuel de la maladie
 	 * @param niveauMaximum int: niveau maximum de la maladie
+   * @throws ErreurChangementNiveauException Erreur si le niveau actuel de la maladie est entre 0 et le niveau maximum
 	 * */
 	public Maladie(String nomComplet, String nomAbrege, int niveauActuel, int niveauMaximum) throws ErreurChangementNiveauException {
 		this(nomComplet, nomAbrege, niveauMaximum);
