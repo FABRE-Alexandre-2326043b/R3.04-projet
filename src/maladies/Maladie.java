@@ -5,7 +5,8 @@ package maladies;
  * Classe abstraite représentant une maladie quelconque. Elle permet de décrire le fonctionnement basique d'une maladie.
  * Une maladie possède un nom complet et un nom abrégé, représentant la même maladie.<br>
  * Une maladie possède un niveau qui représente la gravité actuelle de la maladie. Plus le niveau est haut, plus la maladie est grave.
- * Si ce niveau est nul, cela veut dire que la maladie ne touche aucune créature.
+ * Si ce niveau est nul, cela veut dire que la maladie ne touche aucune créature.<br>
+ * Les niveaux actuels et maximums doivent être entre 0 et 1000 inclus.
  * Si une maladie dépasse une certain niveau, le niveau maximum, la maladie est létale et la créature trépasse.
  * */
 public abstract class Maladie {
@@ -32,6 +33,11 @@ public abstract class Maladie {
 	 * Niveau maximum de la maladie avant trépas
 	 * */
 	private int niveauMaximum;
+
+	/**
+	 * Le coefficient de dégradation de la maladie
+	 * */
+	private double coeffDegradation;
 	
 	//Constructeurs
 	
@@ -42,12 +48,19 @@ public abstract class Maladie {
 	 * @param nomComplet String: nom complet de la maldie
 	 * @param nomAbrege String: nom abrégé de la maladie
 	 * @param niveauMaximum int: niveau maximum de la maladie
+	 * @throws ErreurChangementNiveauException Erreur si le
 	 * */
-	public Maladie(String nomComplet, String nomAbrege, int niveauMaximum) {
+	public Maladie(String nomComplet, String nomAbrege, int niveauMaximum) throws ErreurChangementNiveauException {
 		this.nomComplet = nomComplet;
 		this.nomAbrege = nomAbrege;
-		this.niveauMaximum = niveauMaximum;
+		if (0 < niveauMaximum && niveauMaximum <= 1000) {
+			this.niveauMaximum = niveauMaximum;
+		}
+		else {
+			throw new ErreurChangementNiveauException();
+		}
 		this.niveauActuel = 0;
+		this.coeffDegradation = 0;
 	}
 	
 	/**
@@ -58,9 +71,14 @@ public abstract class Maladie {
 	 * @param niveauActuel int: niveau actuel de la maladie
 	 * @param niveauMaximum int: niveau maximum de la maladie
 	 * */
-	public Maladie(String nomComplet, String nomAbrege, int niveauActuel, int niveauMaximum) {
+	public Maladie(String nomComplet, String nomAbrege, int niveauActuel, int niveauMaximum) throws ErreurChangementNiveauException {
 		this(nomComplet, nomAbrege, niveauMaximum);
-		this.niveauActuel = niveauActuel;
+		if (0 < niveauActuel && niveauActuel <= niveauMaximum) {
+			this.niveauActuel = niveauActuel;
+		}
+		else {
+			throw new ErreurChangementNiveauException();
+		}
 	}
 	
 	//Getters/Setters
@@ -86,12 +104,12 @@ public abstract class Maladie {
      * Permet d'augmenter le niveau actuel de la maladie en entrant la valeur correspondante
      * @param niveau int: Le nombre de niveau à augmenter
      * */
-    public void augmenterNiveauActuel(int niveau) {
-    	if (this.niveauActuel + niveau < Integer.MAX_VALUE) {
+    public void augmenterNiveauActuel(int niveau) throws ErreurChangementNiveauException {
+    	if (this.niveauActuel + niveau <= 1000) {
     		this.niveauActuel += niveau;
     	}
     	else {
-    		System.err.println("La valeur que vous avez entrée provoque un dépassement de la limite des entiers.");
+    		throw new ErreurChangementNiveauException();
     	}
     }
     
@@ -99,12 +117,12 @@ public abstract class Maladie {
      * Permet de réduire le niveau actuel de la maladie en entrant la valeur correspondante
      * @param niveau int: Le nombre de niveau à réduire
      * */
-    public void reduireNiveauActuel(int niveau) {
+    public void reduireNiveauActuel(int niveau) throws ErreurChangementNiveauException {
     	if (this.niveauActuel-niveau >= 0) {
     		this.niveauActuel -= niveau;
     	}
     	else {
-    		System.err.println("La valeur que vous avez entrée est invalide.");
+    		throw new ErreurChangementNiveauException();
     	}
     }
     
@@ -120,6 +138,11 @@ public abstract class Maladie {
     		return false;
     	}
     }
+
+	/**
+	 * Permet de calculer le coefficient de dégradation de la maladie. Fonction abstraite car cela dépend de la maladie.
+	 * */
+	abstract double calculerCoefficientDegradationMaladie();
     
     //toString
     

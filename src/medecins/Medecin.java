@@ -1,5 +1,8 @@
 package medecins;
 
+import creatures.Creature;
+import serviceMedical.ServiceMedical;
+
 /**
  * Classe représentant un médecin.
  * */
@@ -35,7 +38,31 @@ public class Medecin {
 		this.sexe = sexe;
 		this.age = age;
 	}
-	
+
+	public String getNom () {
+		return this.nom;
+	}
+
+	public int getAge () {
+		return this.age;
+	}
+
+	public String getSexe () {
+		return this.sexe;
+	}
+
+	public void setAge (int age) {
+		this.age = age;
+	}
+
+	public void setSexe (String sexe) {
+		this.sexe = sexe;
+	}
+
+	public void setNom (String nom) {
+		this.nom = nom;
+	}
+
 	//toString
 	
 	/**
