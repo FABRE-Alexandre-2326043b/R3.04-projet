@@ -8,6 +8,7 @@ import creatures.Creature;
 import maladies.Maladie;
 import medecins.Medecin;
 import serviceMedical.ServiceMedical;
+import serviceMedical.TropDeCreaturesException;
 
 
 /**
@@ -122,21 +123,13 @@ public class Hopital {
 		this.listeServicesMedicauxExistants.remove(serviceMedical);
 	}
 
-	/**
-	 * Fonction permettant de vérifier l'existance d'un service médical
-	 * @param serviceMedical ServiceMedical: service médical dont on cherche à vérifier son existance
-	 * @return existe boolean: Si le service médical existe
-	 * @see ServiceMedical
-	 * */
-	public boolean serviceMedicalExiste(ServiceMedical serviceMedical) {
-		boolean existe = false;
-		Iterator<ServiceMedical> iterateur = this.listeServicesMedicauxExistants.iterator();
-		for (; iterateur.hasNext(); ) {
-			if (iterateur.next() == serviceMedical) {
-				existe = true;
+	public ServiceMedical getServiceMedical(String nom) {
+		for (ServiceMedical serviceMedical : this.listeServicesMedicauxExistants) {
+			if (serviceMedical.getNom().equals(nom)) {
+				return serviceMedical;
 			}
 		}
-		return existe;
+		return null;
 	}
 
 	/**
@@ -160,9 +153,10 @@ public class Hopital {
 	 * */
 	public void afficherCreatures() {
 		for (int i = 0; i < listeServicesMedicauxExistants.size(); ++i) {
+			System.out.println(listeServicesMedicauxExistants.get(i).getNom() + "a pour créatures: ");
 			Iterator<Creature> iterateurCreature = listeServicesMedicauxExistants.get(i).getListeCreatures().iterator();
 			for (; iterateurCreature.hasNext();) {
-				System.out.println(iterateurCreature.next().toString() + ",");
+				System.out.println("\t" + iterateurCreature.next().toString());
 			}
 		}
 	}
@@ -174,7 +168,7 @@ public class Hopital {
 	 * @see ServiceMedical
 	 * */
 	public void examinerServiceMedical(Medecin medecin, ServiceMedical serviceMedical) {
-		serviceMedical.afficherCaractéristiquesCreatures();
+		serviceMedical.afficherCaracteristiquesCreatures();
 	}
 
 	/**
@@ -204,7 +198,7 @@ public class Hopital {
 	 * */
 	public void transfererCreatureServicesMedicales(Creature creature,
 													ServiceMedical serviceMedicalEnvoyante,
-													ServiceMedical serviceMedicalReceptrice) {
+													ServiceMedical serviceMedicalReceptrice) throws TropDeCreaturesException {
 		serviceMedicalReceptrice.retirerCreature(creature);
 		serviceMedicalEnvoyante.ajouterCreature(creature);
 	}
@@ -223,14 +217,6 @@ public class Hopital {
 	 * */
 	public void setNom (String nom) {
 		this.nom = nom;
-	}
-
-	/**
-	 * Renvoie le nombre maximum de services médicaux acceptables dans l'hôpital
-	 * @return int: le nombre maximum de services médicaux
-	 */
-	public int getNbServicesMedicauxMax () {
-		return this.nbServicesMedicauxMax;
 	}
 
 	/**
