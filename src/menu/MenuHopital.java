@@ -1,3 +1,4 @@
+
 package menu;
 
 import hopital.Hopital;
@@ -8,179 +9,238 @@ import serviceMedical.CentreQuarantaine;
 import serviceMedical.Crypte;
 import serviceMedical.ServiceMedical;
 
-import java.io.IOException;
 import java.util.Scanner;
 
 /**
  * Classe qui permet d'afficher le menu pour les hôpitaux
  * @see MenuInterface
- * */
+ */
 public class MenuHopital implements MenuInterface {
-
 
     private static MenuHopital instanceMenuHopital;
 
     /**
      * Entrée utilisateur. C'est cette variable de type Scanner qui lira les entrées de l'utilisateur
-     * */
+     */
     private Scanner entreeUtilisateur;
 
     /**
      * Chaine qui réceptionne l'entrée de l'utilisateur.
-     * */
-    String chaineEntreeUtilisateur;
+     */
+    private String chaineEntreeUtilisateur;
 
     private Hopital hopital;
 
-    //Constructeur
+    // Constructeur
 
-    /***/
+    /**
+     * Constructeur privé pour le singleton
+     */
     private MenuHopital() {
         this.hopital = Hopital.getInstance();
         this.entreeUtilisateur = new Scanner(System.in);
-        this.chaineEntreeUtilisateur = " ";
+        this.chaineEntreeUtilisateur = "";
     }
 
     /**
-     *
+     * Affiche le menu principal de l'hôpital
+     * @throws MauvaiseEntreeException
+     * @throws NullPointerListeServicesMedicauxException
+     * @throws TropDeServicesMedicauxException
      */
     @Override
-    public void afficherMenu () throws MauvaiseEntreeException, NullPointerListeServicesMedicauxException, TropDeServicesMedicauxException {
-        System.out.println("Vous êtes dans le menu de l'hôpital: Veuillez faire un choix:");
+    public void afficherMenu() throws MauvaiseEntreeException, NullPointerListeServicesMedicauxException, TropDeServicesMedicauxException {
+        System.out.println("Vous êtes dans le menu de l'hôpital. Veuillez faire un choix:");
         menuDeChoix();
     }
 
     /**
-     *
+     * Affiche les choix du menu et traite les entrées utilisateur
+     * @throws MauvaiseEntreeException
+     * @throws NullPointerListeServicesMedicauxException
+     * @throws TropDeServicesMedicauxException
      */
     @Override
-    public void menuDeChoix () throws MauvaiseEntreeException, NullPointerListeServicesMedicauxException, TropDeServicesMedicauxException {
+    public void menuDeChoix() throws MauvaiseEntreeException, NullPointerListeServicesMedicauxException, TropDeServicesMedicauxException {
         boolean quitter = false;
         while (!quitter) {
-            System.out.println("Choisissez votre choix dans le menu principal:");
-            this.chaineEntreeUtilisateur = entreeUtilisateur.next();
-            switch (chaineEntreeUtilisateur) {
-                case "modifierNomHopital":
-                    System.out.println ("Entrer le nouveau nom de l'hôpital");
-                    this.chaineEntreeUtilisateur = this.entreeUtilisateur.nextLine();
-                    this.hopital.setNom(this.chaineEntreeUtilisateur);
+            System.out.println("Choisissez une option dans le menu principal:");
+            System.out.println("1. Modifier le nom de l'hôpital");
+            System.out.println("2. Modifier le nombre maximum de services médicaux");
+            System.out.println("3. Ajouter un médecin");
+            System.out.println("4. Chercher un médecin");
+            System.out.println("5. Supprimer un médecin");
+            System.out.println("6. Ajouter un service médical");
+            System.out.println("7. Chercher un service médical");
+            System.out.println("8. Supprimer un service médical");
+            System.out.println("9. Afficher les créatures");
+            System.out.println("10. Compter les créatures");
+            System.out.println("11. Examiner un service médical");
+            System.out.println("12. Quitter");
+
+            this.chaineEntreeUtilisateur = entreeUtilisateur.nextLine();
+            switch (this.chaineEntreeUtilisateur) {
+                case "1":
+                    modifierNomHopital();
                     break;
-
-                case "modfifierMaximumServiceMedical":
-                    System.out.println ("Entrer le nouveau maximum de services médicaux");
-                    hopital.setNbServicesMedicauxMax(this.entreeUtilisateur.nextInt());
-
-                case "modifierNombreMaximumDeServicesMedicaux":
-                    System.out.println ("Entrer le nombre de services médicaux maximum");
-                    this.chaineEntreeUtilisateur = this.entreeUtilisateur.nextLine();
-                    this.hopital.setNom(this.chaineEntreeUtilisateur);
+                case "2":
+                    modifierNombreMaximumDeServicesMedicaux();
                     break;
-
-                case "ajouterMedecin":
-                    System.out.println ("Entrer le nom de medecin");
-                    String nomMedecin = this.entreeUtilisateur.nextLine();
-                    System.out.println ("Entrer l'âge du médecin");
-                    int ageMedecin = this.entreeUtilisateur.nextInt();
-                    System.out.println ("Entrer le sexe du médecin");
-                    String sexeMedecin = this.chaineEntreeUtilisateur = this.entreeUtilisateur.nextLine();
-                    hopital.ajouterMedecin(new Medecin(nomMedecin, sexeMedecin, ageMedecin));
+                case "3":
+                    ajouterMedecin();
                     break;
-
-                case "chercherMedecin":
-                    System.out.println ("Entrer le nom du médecin que vous cherchez: ");
-                    nomMedecin = this.entreeUtilisateur.nextLine();
-                    try {
-                        hopital.getMedecin(nomMedecin);
-                        System.out.println("Le médecin '" + nomMedecin + "' existe.");
-                    }
-                    catch (NullPointerException e) {
-                        System.out.println("Le médecin n'existe pas");
-                    }
-
-                case "supprimerMedecin":
-                    System.out.println ("Entrer le nom de medecin");
-                    this.chaineEntreeUtilisateur = this.entreeUtilisateur.nextLine();
-                    try {
-                        this.hopital.supprimerMedecin (this.hopital.getMedecin (this.chaineEntreeUtilisateur));
-                    }
-                    catch (NullPointerException e) {
-                        System.out.println ("Le médecin n'existe pas");
-                    }
+                case "4":
+                    chercherMedecin();
                     break;
-
-                case "ajouterServiceMedical":
-                    String typeSM = "";
-                    while (!typeSM.equals("q") && !typeSM.equals("c")) {
-                        System.out.println ("Voulez-vous que votre système médical soit une crypte ou un centre de quarantaine? Tapez c pour la première option et q pour la deuxième.");
-                        typeSM = this.entreeUtilisateur.nextLine();
-                    }
-                    System.out.println("Entrer le nom du nouveau service médical");
-                    this.chaineEntreeUtilisateur = this.entreeUtilisateur.nextLine();
-                    System.out.println("Entrez la superficie:");
-                    int superficie = this.entreeUtilisateur.nextInt();
-                    System.out.println("Entrez le nombre de créatures max:");
-                    int nbCreaturesMax = this.entreeUtilisateur.nextInt();
-                    try {
-                        if (typeSM.equals ("c")) {
-                            hopital.ajouterServiceMedical(new Crypte(this.chaineEntreeUtilisateur, superficie, nbCreaturesMax));
-                        }
-                        else {
-                            hopital.ajouterServiceMedical(new CentreQuarantaine(this.chaineEntreeUtilisateur, superficie, nbCreaturesMax));
-                        }
-                    }
-                    catch (TropDeServicesMedicauxException e) {
-                        System.out.println(e.getMessage());
-                    }
-
+                case "5":
+                    supprimerMedecin();
                     break;
-
-                case "chercherServiceMedical":
-                    System.out.println ("Entrer le nom du service médical que vous cherchez: ");
-                    this.chaineEntreeUtilisateur = this.entreeUtilisateur.nextLine();
-                    ServiceMedical serviceMedical = hopital.getServiceMedical(this.chaineEntreeUtilisateur);
-                    System.out.println("Le service médical " + serviceMedical.getNom () + " existe.");
-                    if (serviceMedical == null) {
-                        throw new NullPointerListeServicesMedicauxException();
-                    }
-
-                case "supprimerServiceMedical":
-                    System.out.println ("Entrer le nom du service médical à supprimer");
-                    this.chaineEntreeUtilisateur = this.entreeUtilisateur.nextLine();
-                    try {
-                        hopital.supprimerServiceMedical(hopital.getServiceMedical(this.chaineEntreeUtilisateur));
-                    }
-                    catch (NullPointerListeServicesMedicauxException e) {
-                        System.out.println(e.getMessage());
-                    }
+                case "6":
+                    ajouterServiceMedical();
                     break;
-
-                case "afficherCreatures":
-                    hopital.afficherCreatures();
+                case "7":
+                    chercherServiceMedical();
                     break;
-
-                case "compterCreatures":
-                    int nbCreatures = hopital.connaitreNombreCreatures();
-                    System.out.println("Il y a " + nbCreatures + " créatures dans l'hôpital");
-
-                case "examinerServiceMedical":
-                    System.out.println ("Entrer le nom de médecin qui examine le service médical:");
-                    String medecinExamen = this.entreeUtilisateur.nextLine();
-                    System.out.println ("Choississez le service médical à examiner");
-                    String serviceMedicalExamen = this.entreeUtilisateur.nextLine();
-                    hopital.examinerServiceMedical(hopital.getMedecin(medecinExamen), hopital.getServiceMedical (serviceMedicalExamen));
+                case "8":
+                    supprimerServiceMedical();
                     break;
-
-                case "quitter":
+                case "9":
+                    afficherCreatures();
+                    break;
+                case "10":
+                    compterCreatures();
+                    break;
+                case "11":
+                    examinerServiceMedical();
+                    break;
+                case "12":
                     quitter = true;
                     break;
                 default:
-                    throw new MauvaiseEntreeException();
+                    System.out.println("Entrée incorrecte. Veuillez réessayer.");
             }
         }
-        this.entreeUtilisateur.close();
+        entreeUtilisateur.close();
     }
 
-    /***/
+    private void modifierNomHopital() {
+        System.out.println("Entrer le nouveau nom de l'hôpital:");
+        this.chaineEntreeUtilisateur = this.entreeUtilisateur.nextLine();
+        this.hopital.setNom(this.chaineEntreeUtilisateur);
+        System.out.println("Nom de l'hôpital modifié avec succès.");
+    }
+
+    private void modifierNombreMaximumDeServicesMedicaux() {
+        System.out.println("Entrer le nouveau nombre maximum de services médicaux:");
+        int nbServicesMedicauxMax = this.entreeUtilisateur.nextInt();
+        this.entreeUtilisateur.nextLine(); // Consommer la nouvelle ligne
+        this.hopital.setNbServicesMedicauxMax(nbServicesMedicauxMax);
+        System.out.println("Nombre maximum de services médicaux modifié avec succès.");
+    }
+
+    private void ajouterMedecin() {
+        System.out.println("Entrer le nom du médecin:");
+        String nomMedecin = this.entreeUtilisateur.nextLine();
+        System.out.println("Entrer l'âge du médecin:");
+        int ageMedecin = this.entreeUtilisateur.nextInt();
+        this.entreeUtilisateur.nextLine(); // Consommer la nouvelle ligne
+        System.out.println("Entrer le sexe du médecin:");
+        String sexeMedecin = this.entreeUtilisateur.nextLine();
+        this.hopital.ajouterMedecin(new Medecin(nomMedecin, sexeMedecin, ageMedecin));
+        System.out.println("Médecin ajouté avec succès.");
+    }
+
+    private void chercherMedecin() {
+        System.out.println("Entrer le nom du médecin que vous cherchez:");
+        String nomMedecin = this.entreeUtilisateur.nextLine();
+        try {
+            Medecin medecin = this.hopital.getMedecin(nomMedecin);
+            System.out.println("Le médecin '" + nomMedecin + "' existe.");
+        } catch (NullPointerException e) {
+            System.out.println("Le médecin n'existe pas.");
+        }
+    }
+
+    private void supprimerMedecin() {
+        System.out.println("Entrer le nom du médecin à supprimer:");
+        String nomMedecin = this.entreeUtilisateur.nextLine();
+        try {
+            this.hopital.supprimerMedecin(this.hopital.getMedecin(nomMedecin));
+            System.out.println("Médecin supprimé avec succès.");
+        } catch (NullPointerException e) {
+            System.out.println("Le médecin n'existe pas.");
+        }
+    }
+
+    private void ajouterServiceMedical() {
+        String typeSM = "";
+        while (!typeSM.equals("c") && !typeSM.equals("q")) {
+            System.out.println("Voulez-vous que votre service médical soit une crypte ou un centre de quarantaine? Tapez 'c' pour la première option et 'q' pour la deuxième.");
+            typeSM = this.entreeUtilisateur.nextLine();
+        }
+        System.out.println("Entrer le nom du nouveau service médical:");
+        String nomService = this.entreeUtilisateur.nextLine();
+        System.out.println("Entrer la superficie:");
+        int superficie = this.entreeUtilisateur.nextInt();
+        System.out.println("Entrer le nombre de créatures max:");
+        int nbCreaturesMax = this.entreeUtilisateur.nextInt();
+        this.entreeUtilisateur.nextLine(); // Consommer la nouvelle ligne
+        try {
+            if (typeSM.equals("c")) {
+                this.hopital.ajouterServiceMedical(new Crypte(nomService, superficie, nbCreaturesMax));
+            } else {
+                this.hopital.ajouterServiceMedical(new CentreQuarantaine(nomService, superficie, nbCreaturesMax));
+            }
+            System.out.println("Service médical ajouté avec succès.");
+        } catch (TropDeServicesMedicauxException e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
+    private void chercherServiceMedical() {
+        System.out.println("Entrer le nom du service médical que vous cherchez:");
+        String nomService = this.entreeUtilisateur.nextLine();
+        ServiceMedical serviceMedical = this.hopital.getServiceMedical(nomService);
+        if (serviceMedical != null) {
+            System.out.println("Le service médical '" + nomService + "' existe.");
+        } else {
+            System.out.println("Le service médical n'existe pas.");
+        }
+    }
+
+    private void supprimerServiceMedical() {
+        System.out.println("Entrer le nom du service médical à supprimer:");
+        String nomService = this.entreeUtilisateur.nextLine();
+        try {
+            this.hopital.supprimerServiceMedical(this.hopital.getServiceMedical(nomService));
+            System.out.println("Service médical supprimé avec succès.");
+        } catch (NullPointerListeServicesMedicauxException e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
+    private void afficherCreatures() {
+        this.hopital.afficherCreatures();
+    }
+
+    private void compterCreatures() {
+        int nbCreatures = this.hopital.connaitreNombreCreatures();
+        System.out.println("Il y a " + nbCreatures + " créatures dans l'hôpital.");
+    }
+
+    private void examinerServiceMedical() {
+        System.out.println("Entrer le nom du médecin qui examine le service médical:");
+        String medecinExamen = this.entreeUtilisateur.nextLine();
+        System.out.println("Choisissez le service médical à examiner:");
+        String serviceMedicalExamen = this.entreeUtilisateur.nextLine();
+        this.hopital.examinerServiceMedical(this.hopital.getMedecin(medecinExamen), this.hopital.getServiceMedical(serviceMedicalExamen));
+        System.out.println("Examen du service médical effectué avec succès.");
+    }
+
+    /**
+     * Retourne l'instance unique de MenuHopital
+     * @return instanceMenuHopital
+     */
     public static MenuHopital getInstanceMenuHopital() {
         if (instanceMenuHopital == null) {
             instanceMenuHopital = new MenuHopital();

@@ -80,23 +80,6 @@ public abstract class Maladie {
 			throw new ErreurChangementNiveauException();
 		}
 	}
-	
-	//Getters/Setters
-	/**
-	 * Renvoie le nom complet de la maladie
-	 * @return nomComplet String: Nom complet de la maladie sous forme de chaîne de caractères
-	 * */
-    public String getNomComplet() {
-        return this.nomComplet;
-    }
-    
-    /**
-     * Renvoie le nom abregé de la maladie
-     * @return nomAbrege String: Nom abrégé de la maladie sous forme de chaîne de caractères
-     * */
-    public String getNomAbrege() {
-    	return this.nomAbrege;
-    }
     
     //Méthodes
     
@@ -156,4 +139,49 @@ public abstract class Maladie {
     	return "Maladie[nomComplet=" + this.nomComplet + ", nomAgrege=" + this.nomAbrege +
     			", niveauActuel=" + this.niveauActuel + ", niveauMaximum=" + this.niveauMaximum + "]";
     }
+
+    //Getters/Setters
+
+	public String getNomComplet() {
+		return nomComplet;
+	}
+
+	public void setNomComplet(String nomComplet) {
+		this.nomComplet = nomComplet;
+	}
+
+	public String getNomAbrege() {
+		return nomAbrege;
+	}
+
+	public void setNomAbrege(String nomAbrege) {
+		this.nomAbrege = nomAbrege;
+	}
+
+	public int getNiveauActuel() {
+		return niveauActuel;
+	}
+
+	public void setNiveauActuel(int niveauActuel) {
+		this.niveauActuel = niveauActuel;
+	}
+
+	public int getNiveauMaximum() {
+		return niveauMaximum;
+	}
+
+	public void setNiveauMaximum(int niveauMaximum) {
+		this.niveauMaximum = niveauMaximum;
+	}
+
+	public double getCoeffDegradation() {
+		return coeffDegradation;
+	}
+
+	public void setCoeffDegradation(double coeffDegradation) {
+		this.coeffDegradation = coeffDegradation;
+	}
+    
+    
+  	
 }

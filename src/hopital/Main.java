@@ -1,35 +1,34 @@
+
 package hopital;
 
 import maladies.ErreurChangementNiveauException;
 import menu.*;
 import serviceMedical.TropDeCreaturesException;
+import creatures.Meute;
+import serviceMedical.ServiceMedical;
 
-/**
- * Classe pricipale du programme
- * Elle permet d'exécuter l'application
- * */
-public class Main implements Runnable {
+import java.util.ArrayList;
+import java.util.List;
 
-	/**
-	 * Permet de gérer les threads
-	 * @see Runnable
-	 */
-	@Override
-	public void run () {
+public class Main {
+    public static void main(String[] args) throws MauvaiseEntreeException, NullPointerListeServicesMedicauxException,
+                                                  ErreurChangementNiveauException, TropDeServicesMedicauxException,
+                                                  TropDeCreaturesException {
+        List<Meute> meutes = new ArrayList<>();
+        List<ServiceMedical> servicesMedicaux = new ArrayList<>();
 
-	}
+        GestionAleatoireThread gestionAleatoire = new GestionAleatoireThread(meutes, servicesMedicaux);
+        Thread simulationThread = new Thread(gestionAleatoire);
+        simulationThread.start();
 
-	//main
+        MenuPrincipal menuPrincipal = MenuPrincipal.getInstanceMenuPrincipal();
+        menuPrincipal.afficherMenuDemarrageApplication();
+        System.out.println("Configuration initiale terminée!");
+        menuPrincipal.afficherMenu();
 
-	/**
-	 * Programme principale main() qui permet l'exécution du programme
-	 * @param args String[] arguments de la fonction main
-	 * */
-	public static void main(String[] args) throws MauvaiseEntreeException, NullPointerListeServicesMedicauxException, ErreurChangementNiveauException, TropDeServicesMedicauxException, TropDeCreaturesException {
-		MenuPrincipal menuPrincipal = MenuPrincipal.getInstanceMenuPrincipal();
-		menuPrincipal.afficherMenuDemarrageApplication();
-		System.out.println("Configuration initiale terminée!");
-		menuPrincipal.afficherMenu();
-		System.out.println("Merci d'avoir utilisé le logiciel de gestion de l'hôpital fantastique.");
-	}
+        simulationThread.interrupt();
+        System.out.println("Merci d'avoir utilisé le logiciel de gestion de l'hôpital fantastique.");
+
+        menuPrincipal.closeScanner();
+    }
 }

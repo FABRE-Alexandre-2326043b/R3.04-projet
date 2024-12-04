@@ -4,7 +4,9 @@ import org.junit.jupiter.api.Test;
 import creatures.Hurlement;
 import creatures.Lycanthrope;
 import creatures.Meute;
+import maladies.ErreurChangementNiveauException;
 import maladies.Maladie;
+import maladies.MaladieDebilitanteChronique;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -30,9 +32,15 @@ class LycanthropeTest {
     @Test
     void testEstTropMalade() {
         List<Maladie> maladies = new ArrayList<>();
-        maladies.add(new Maladie(15, 10)); // Maladie létale
+        try {
+            maladies.add(new MaladieDebilitanteChronique(15, 10));
+        } catch (ErreurChangementNiveauException e) {
+            fail("Erreur lors de la création de la maladie : " + e.getMessage());
+        }
+
         Lycanthrope lycanthrope = new Lycanthrope("John", "M", 80, 180, 30, 50,
                 maladies, "adulte", 70, 5, "β", 100, 0.5, null);
+
         assertTrue(lycanthrope.estTropMalade());
     }
 
