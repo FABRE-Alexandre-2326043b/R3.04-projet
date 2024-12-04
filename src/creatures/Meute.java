@@ -40,4 +40,22 @@ public class Meute {
         System.out.println("Membres de la meute :");
         membres.forEach(membre -> System.out.println(membre.afficherCaracteristiques()));
     }
+
+	public CoupleAlpha getCoupleAlpha() {
+		return coupleAlpha;
+	}
+
+	public void setCoupleAlpha(CoupleAlpha coupleAlpha) {
+		this.coupleAlpha = coupleAlpha;
+	}
+
+	public List<Lycanthrope> getMembres() {
+		return membres;
+	}
+
+	public void setMembres(List<Lycanthrope> membres) {
+		this.membres = membres;
+	}
+    
+    
 }

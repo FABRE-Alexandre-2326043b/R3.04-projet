@@ -17,4 +17,14 @@ public class Colonie {
     public void afficherLycanthropes() {
         meutes.forEach(Meute::afficherCaracteristiques);
     }
+
+	public List<Meute> getMeutes() {
+		return meutes;
+	}
+
+	public void setMeutes(List<Meute> meutes) {
+		this.meutes = meutes;
+	}
+    
+    
 }

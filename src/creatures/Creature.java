@@ -164,10 +164,77 @@ public abstract class Creature {
 		System.out.print("%, Liste de maladies : [");
 		for (Maladie maladie : listeMaladies) {
 			System.out.print(maladie.getNomAbrege());
-			if(!listeMaladies.getLast().equals(maladie)) {
+			if (!listeMaladies.get(listeMaladies.size() - 1).equals(maladie)) {
 				System.out.print(",");
 			}
 		}
 		System.out.println("]");
 	}
+
+	public String getNomComplet() {
+		return nomComplet;
+	}
+
+	public void setNomComplet(String nomComplet) {
+		this.nomComplet = nomComplet;
+	}
+
+	public String getSexe() {
+		return sexe;
+	}
+
+	public void setSexe(String sexe) {
+		this.sexe = sexe;
+	}
+
+	public int getPoids() {
+		return poids;
+	}
+
+	public void setPoids(int poids) {
+		this.poids = poids;
+	}
+
+	public int getTaille() {
+		return taille;
+	}
+
+	public void setTaille(int taille) {
+		this.taille = taille;
+	}
+
+	public int getAge() {
+		return age;
+	}
+
+	public void setAge(int age) {
+		this.age = age;
+	}
+
+	public int getIndicateurMoral() {
+		return indicateurMoral;
+	}
+
+	public void setIndicateurMoral(int indicateurMoral) {
+		this.indicateurMoral = indicateurMoral;
+	}
+
+	public int getNbHurlements() {
+		return nbHurlements;
+	}
+
+	public void setNbHurlements(int nbHurlements) {
+		this.nbHurlements = nbHurlements;
+	}
+
+	public boolean isRepresentants() {
+		return representants;
+	}
+
+	public void setListeMaladies(ArrayList<Maladie> listeMaladies) {
+		this.listeMaladies = listeMaladies;
+	}
+	
+	
+	
 }
