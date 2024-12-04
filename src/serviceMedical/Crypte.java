@@ -4,7 +4,9 @@ public class Crypte extends ServiceMedical {
 	public int niveauVentilation;
 	public int temperature;
 	
-	
+	public Crypte(String nom, int superficie, int nbCreaturesMax) {
+		super(nom, superficie, nbCreaturesMax);
+	}
 	
 	public void reviserBudget() {
 		int cout = (6 - niveauVentilation)/6;

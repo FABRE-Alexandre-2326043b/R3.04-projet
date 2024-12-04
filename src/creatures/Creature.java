@@ -153,7 +153,7 @@ public abstract class Creature {
         indicateurMoral-=5;
 	}
 	
-	public void afficherCaractéristiques() {
+	public void afficherCaracteristiques() {
 		System.out.println();
 		System.out.print("Nom complet : " + nomComplet);
 		System.out.print(", Sexe : " + sexe);
@@ -173,11 +173,13 @@ public abstract class Creature {
 
 	public String getNomComplet() {
 		return nomComplet;
+
 	}
 
 	public void setNomComplet(String nomComplet) {
 		this.nomComplet = nomComplet;
 	}
+
 
 	public String getSexe() {
 		return sexe;
@@ -237,4 +239,5 @@ public abstract class Creature {
 	
 	
 	
+
 }

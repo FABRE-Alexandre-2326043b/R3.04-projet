@@ -25,7 +25,7 @@ public class Lycanthrope {
     private int facteurDomination;
     private String rang;
     private int niveau;
-    private double facteurImpétuosité;
+    private double facteurImpetuosite;
     private Meute meute;
 
     /**
@@ -48,7 +48,7 @@ public class Lycanthrope {
      */
     public Lycanthrope(String nomComplet, String sexe, int poids, int taille, int age, double indicateurMoral,
                        List<Maladie> listeMaladies, String categorieAge, int force, int facteurDomination,
-                       String rang, int niveau, double facteurImpétuosité, Meute meute) {
+                       String rang, int niveau, double facteurImpetuosite, Meute meute) {
         this.nomComplet = nomComplet;
         this.sexe = sexe;
         this.poids = poids;
@@ -61,7 +61,7 @@ public class Lycanthrope {
         this.facteurDomination = facteurDomination;
         this.rang = rang;
         this.niveau = niveau;
-        this.facteurImpétuosité = facteurImpétuosité;
+        this.facteurImpetuosite = facteurImpetuosite;
         this.meute = meute;
     }
 
@@ -226,12 +226,12 @@ public class Lycanthrope {
 		this.niveau = niveau;
 	}
 
-	public double getFacteurImpétuosité() {
-		return facteurImpétuosité;
+	public double getFacteurImpetuosite() {
+		return facteurImpetuosite;
 	}
 
-	public void setFacteurImpétuosité(double facteurImpétuosité) {
-		this.facteurImpétuosité = facteurImpétuosité;
+	public void setFacteurImpetuosite(double facteurImpetuosite) {
+		this.facteurImpetuosite = facteurImpetuosite;
 	}
 
 	public Meute getMeute() {
