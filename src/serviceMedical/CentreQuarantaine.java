@@ -2,7 +2,11 @@ package serviceMedical;
 
 public class CentreQuarantaine extends ServiceMedical {
 	public int isolation;
-	
+
+	public CentreQuarantaine(String nom, int superficie, int nbCreaturesMax) {
+		super(nom, superficie, nbCreaturesMax);
+	}
+
 	public void reviserBudget() {		
 		int cout = (6 - isolation)/6;
 		cout -= nbCreatures/nbCreaturesMax;

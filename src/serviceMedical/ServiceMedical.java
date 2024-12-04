@@ -14,26 +14,50 @@ public class ServiceMedical {
 	public ArrayList<Creature> listeCreatures;
 	public String budget;
 	
-	public void afficherCaractéristiquesCreatures() {
+	public void afficherCaracteristiquesCreatures() {
 		System.out.println("Nom : " + nom);
 		System.out.println("Superficie : " + superficie);
 		System.out.println("Nombres de créatures/maximum" + nbCreaturesMax + "/" + nbCreatures);
 		System.out.println("Créatures présentes :");
 		for (int i=0; i<nbCreatures;++i) {
-			listeCreatures.get(i).afficherCaractéristiques();
+			listeCreatures.get(i).afficherCaracteristiques();
 		}
 		System.out.println("Budget : " + budget);
 	}
-	
-	public void ajouterCreature(Creature creature) {
+
+	public ServiceMedical(String nom, int superficie, int nbCreaturesMax) {
+		this.nom = nom;
+		this.superficie = superficie;
+		this.nbCreaturesMax = nbCreaturesMax;
+	}
+
+	public void ajouterCreature(Creature creature) throws TropDeCreaturesException {
+		if (this.nbCreatures == this.nbCreaturesMax) {
+			throw new TropDeCreaturesException();
+		}
 		listeCreatures.add(creature);
+		++this.nbCreatures;
 		if (Arrays.asList("Orque","HommeBete","Lycanthrope","Vampire").contains(creature.getClass().getSimpleName())) {
 			creature.setRepresentants(true);
 		}
 	}
-	
+
+	public ArrayList<Creature> getListeCreatures () {
+		return listeCreatures;
+	}
+
+	public Creature getCreature(String nom) {
+		for (Creature creature : listeCreatures) {
+			if (nom.equals (creature.getNomComplet ())) {
+				return creature;
+			}
+		}
+		return null;
+	}
+
 	public void retirerCreature(Creature creature) {
 		listeCreatures.remove(creature);
+		--this.nbCreatures;
 	}
 	
 	public void soignerCreature(Creature creature, Maladie maladie) {
@@ -58,5 +82,12 @@ public class ServiceMedical {
 			budget="excellent";
 		}
 	}
-	
+
+	public String getNom () {
+		return this.nom;
+	}
+
+	public String getBudget () {
+		return this.budget;
+	}
 }

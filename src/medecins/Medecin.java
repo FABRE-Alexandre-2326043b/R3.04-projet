@@ -1,8 +1,5 @@
 package medecins;
 
-import creatures.Creature;
-import serviceMedical.ServiceMedical;
-
 /**
  * Classe représentant un médecin.
  * */
