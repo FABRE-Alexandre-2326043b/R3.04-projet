@@ -4,6 +4,9 @@ import java.util.ArrayList;
 import java.util.List;
 import maladies.Maladie;
 
+/**
+ * Représente un lycanthrope avec ses caractéristiques et ses interactions dans une meute.
+ */
 public class Lycanthrope {
     public String getNomComplet() {
 		return nomComplet;
@@ -25,6 +28,24 @@ public class Lycanthrope {
     private double facteurImpétuosité;
     private Meute meute;
 
+    /**
+     * Constructeur pour créer un lycanthrope.
+     * 
+     * @param nomComplet        Nom complet du lycanthrope.
+     * @param sexe              Sexe du lycanthrope (M/F).
+     * @param poids             Poids du lycanthrope en kg.
+     * @param taille            Taille du lycanthrope en cm.
+     * @param age               Âge du lycanthrope en années.
+     * @param indicateurMoral   Moral du lycanthrope.
+     * @param listeMaladies     Liste des maladies du lycanthrope.
+     * @param categorieAge      Catégorie d'âge (jeune, adulte, vieux).
+     * @param force             Force physique du lycanthrope.
+     * @param facteurDomination Facteur de domination.
+     * @param rang              Rang dans la hiérarchie.
+     * @param niveau            Niveau global du lycanthrope.
+     * @param facteurImpétuosité Facteur d'impétuosité.
+     * @param meute             Meute à laquelle le lycanthrope appartient (ou null s'il est solitaire).
+     */
     public Lycanthrope(String nomComplet, String sexe, int poids, int taille, int age, double indicateurMoral,
                        List<Maladie> listeMaladies, String categorieAge, int force, int facteurDomination,
                        String rang, int niveau, double facteurImpétuosité, Meute meute) {
@@ -44,6 +65,9 @@ public class Lycanthrope {
         this.meute = meute;
     }
 
+    /**
+     * Fait hurler le lycanthrope.
+     */
     public void hurler() {
         System.out.println(nomComplet + " hurle pour exprimer sa présence.");
         if (meute != null) {
@@ -51,17 +75,30 @@ public class Lycanthrope {
         }
     }
 
+    /**
+     * Permet au lycanthrope d'entendre un hurlement.
+     * 
+     * @param hurlement Le hurlement entendu.
+     */
     public void entendreHurlement(Hurlement hurlement) {
         if (!estTropMalade()) {
             System.out.println(nomComplet + " entend le hurlement : " + hurlement.getType());
         }
     }
 
+    /**
+     * Vérifie si le lycanthrope est trop malade pour continuer à interagir normalement.
+     * 
+     * @return true si au moins une maladie est létale, sinon false.
+     */
     public boolean estTropMalade() {
         return listeMaladies.stream().anyMatch(maladie -> maladie.estLetal());
     }
 
 
+    /**
+     * Fait quitter la meute au lycanthrope.
+     */
     public void quitterMeute() {
         if (meute != null) {
             meute.retirerLycanthrope(this);
@@ -70,6 +107,9 @@ public class Lycanthrope {
         }
     }
 
+    /**
+     * Transforme le lycanthrope en humain s'il remplit les conditions.
+     */
     public void seTransformerEnHumain() {
         if (niveau > 50) {
             System.out.println(nomComplet + " se transforme en humain et quitte la colonie.");
@@ -77,6 +117,11 @@ public class Lycanthrope {
         }
     }
 
+    /**
+     * Affiche les caractéristiques détaillées du lycanthrope.
+     * 
+     * @return Une chaîne de caractères représentant les caractéristiques.
+     */
     public String afficherCaracteristiques() {
         return "Nom : " + nomComplet + "\n" +
                "Sexe : " + sexe + "\n" +
